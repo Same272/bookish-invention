@@ -12,7 +12,7 @@ def location_button():
     return kb
 def main_menu_kb():
     kb = types.InlineKeyboardMarkup(row_width=2)
-    button_today = types.InlineKeyboardButton(text='Сегодня', callback_data='today')
-    button_tomorrow = types.InlineKeyboardButton(text='На завтра', callback_data='tomorrow')
-    kb.add(button_today, button_tomorrow)
+    button_uzb = types.InlineKeyboardButton(text='Uzb', callback_data='uzb')
+    button_rus = types.InlineKeyboardButton(text='Rus', callback_data='uzb')
+    kb.add(button_uzb, button_rus)
     return kb

@@ -46,22 +46,14 @@ def get_location(message, name, phone_number):
     else:
         bot.send_message(user_id, 'Отправьте свою локацию через кнопку в меню')
         bot.load_next_step_handlers(message)
-@bot.callback_query_handler(lambda call: call.data in ['today', 'tomorrow'])
+@bot.callback_query_handler(lambda call: call.data in ['uzb', 'rus'])
 def all_call(call):
     user_id = call.message.chat.id
-    if call.data == 'today':
+    bot.send_message(user_id, 'Выберите язык:')
+    if call.data == 'uzb':
         bot.delete_message(user_id, call.message.message_id)
-        bot.send_message(user_id, 'Ваша корзина:')
-    elif call.data == 'tomorrow':
+        bot.send_message(user_id, 'Язык был изменен на узбекский')
+    elif call.data == 'rus':
         bot.delete_message(user_id, call.message.message_id)
-        bot.send_message(user_id, "Главное меню: ", reply_markup=bs.main_menu_kb())
-@bot.callback_query_handler(lambda call: 'weath_' in call.data)
-def get_weather_info(call):
-    user_id = call.message.chat.id
-    bot.delete_message(user_id, call.message.message_id)
-    weather_id = int(call.data.replace('weath_',''))
-    product_info = db.get_exact_weather(weather_id)
-    bot.send_photo(user_id, photo=product_info[3], caption=f'{product_info[0]}\n\n'
-                                                           f'{product_info[2]}\n'
-                                                      f'Цена:{product_info[1]}',)
+        bot.send_message(user_id, "Язык был изменен на русский")
 bot.infinity_polling()
